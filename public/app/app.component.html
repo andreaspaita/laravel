@@ -1,0 +1,13 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="nform-controlle">
+  <form [formGroup]="formTask" (ngSubmit)="onSubmit()">
+  <input type="text" formControlName="name"/>
+    <button type="submit" class="btn btn-success pull-right" >Submit</button>
+  </form>
+</div>
+  <ul>
+    <li *ngFor="let list of TodoList ; let i = index ">
+  {{i + list}} <button (click)="deletetdo(i)">delete</button>
+    </li>
+  </ul>
+<button (click)="sauvegarde()">valide</button>

@@ -1,0 +1,39 @@
+copie du .env
+ php artisan key:generate
+ php artisan make:migration create_tasks_table --create=tasks
+ add fields  $table->string('name');
+ php artisan migrate --force
+php artisan make:controller TaskController
+ http/Controller/
+
+ routes/api
+ Route::post('taskpost','TaskController@store');
+ //exemple 'laravel-master/public/index.php/api/taskcurl'
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Controller;
+use App\Task;
+   public function store(Request $request)
+    {
+        $task = new Task();
+        $task->name = serialize($request->input('name'));
+
+
+        if($task->save())
+        {
+
+            return response()->json('task save', 200);
+        }
+        else
+        {
+            return response()->json('not task save', 200);
+        }
+
+    }
+boostrap/app
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: *');
+header('Access-Control-Allow-Headers: *');
+
+
+ 	curl -H 'content-type: application/json' -v -X POST -d '{"name":"Test curl"}' http://192.168.56.254/laravel-master/public/index.php/api/taskcurl
